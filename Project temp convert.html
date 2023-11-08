@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: auto;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" >
+        <h2 style="background-color: blanchedalmond;">Temperature Converter</h2>
+        <table >
+            <tr>
+                <th>Kelvin</th>
+                <th>Celsius</th>
+                <th>Fahrenheit</th>
+            </tr>
+            <tr>
+                <td><input type="number" id="kelvin" placeholder="Enter temperature in Kelvin" ></td>
+                <td><input type="number" id="celsius" placeholder="Enter temperature in Celsius"></td>
+                <td><input type="number" id="fahrenheit" placeholder="Enter temperature in Fahrenheit"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="3" >
+                    <button onclick="convertTemperature()">Convert</button>
+                    <button onclick="resetValues()">Reset</button>
+                </td>
+            </tr>
+        </table>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convertTemperature() {
+            const kelvin = parseFloat(document.getElementById("kelvin").value);
+            const celsius = parseFloat(document.getElementById("celsius").value);
+            const fahrenheit = parseFloat(document.getElementById("fahrenheit").value);
+
+            if (!isNaN(kelvin)) {
+                // Convert Kelvin to Celsius and Fahrenheit
+                const celsiusResult = kelvin - 273.15;
+                const fahrenheitResult = (celsiusResult * 9/5) + 32;
+
+                document.getElementById("celsius").value = celsiusResult.toFixed(2);
+                document.getElementById("fahrenheit").value = fahrenheitResult.toFixed(2);
+                document.getElementById("result").innerHTML = `Converted to Celsius: ${celsiusResult.toFixed(2)}°C and Fahrenheit: ${fahrenheitResult.toFixed(2)}°F`;
+            } else if (!isNaN(celsius)) {
+                // Convert Celsius to Kelvin and Fahrenheit
+                const kelvinResult = celsius + 273.15;
+                const fahrenheitResult = (celsius * 9/5) + 32;
+
+                document.getElementById("kelvin").value = kelvinResult.toFixed(2);
+                document.getElementById("fahrenheit").value = fahrenheitResult.toFixed(2);
+                document.getElementById("result").innerHTML = `Converted to Kelvin: ${kelvinResult.toFixed(2)}K and Fahrenheit: ${fahrenheitResult.toFixed(2)}°F`;
+            } else if (!isNaN(fahrenheit)) {
+                // Convert Fahrenheit to Celsius and Kelvin
+                const celsiusResult = (fahrenheit - 32) * 5/9;
+                const kelvinResult = celsiusResult + 273.15;
+
+                document.getElementById("celsius").value = celsiusResult.toFixed(2);
+                document.getElementById("kelvin").value = kelvinResult.toFixed(2);
+                document.getElementById("result").innerHTML = `Converted to Celsius: ${celsiusResult.toFixed(2)}°C and Kelvin: ${kelvinResult.toFixed(2)}K`;
+            } else {
+                alert("Please enter a valid temperature value.");
+            }
+        }
+
+        function resetValues() {
+            document.getElementById("kelvin").value = "";
+            document.getElementById("celsius").value = "";
+            document.getElementById("fahrenheit").value = "";
+            document.getElementById("result").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
+
+
+
